@@ -6,6 +6,7 @@ import NotFound from "./component/general/NotFound";
 import AuthContainer from "./component/Auth/container/AuthContainer";
 import CustomerProfile from "./component/customer/component/CustomerProfile";
 import CustomerProfileContainer from "./component/customer/container/CustomerProfileConatiner";
+import CustomerDetailsContainer from "./component/customer/container/CustomerDetailsConatiner";
 
 function App() {
   return (
@@ -15,6 +16,11 @@ function App() {
         exact
         path="/customerProfile"
         component={CustomerProfileContainer}
+      />
+       <Route
+        exact
+        path="/customerDetails"
+        component={CustomerDetailsContainer}
       />
       <Route exact path="/notfound" component={NotFound} />
       <Route>

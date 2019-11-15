@@ -10,7 +10,8 @@ import thunk from "redux-thunk";
 
 import AuthReducer from "./component/Auth/reducer/auth.reducer.js";
 import customerProfile from "./component/customer/reducer/customerProfile.reducer.js";
-const rootReducer = combineReducers({ AuthReducer, customerProfile });
+
+const rootReducer = combineReducers({ AuthReducer, customerProfile});
 const creatStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const store = creatStoreWithMiddleware(rootReducer);
 

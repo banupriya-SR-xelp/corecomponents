@@ -4,9 +4,6 @@ import  styles from "./TableForm.css";
 class Table extends Component {
   state = {};
   render() {
-    this.props.formElements.map((item, index) => {
-      console.log(item);
-    });
 
     return (
       <table className={styles.table}>
