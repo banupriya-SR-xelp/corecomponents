@@ -67,8 +67,11 @@ export default class CustomerProfile extends Component {
   };
 
   handleTenureSelect = val => {
+    this.setState({ tenure: val, showIcon: true });
+  };
+  addRow = () => {
     let orderDetails = {
-      customerId: "a33cef5c-268f-4a8d-a831-ed9c1563edaa",
+      customerId: "4c291fed-0cd0-4745-9608-67ff0bf5f3ec",
       paymentStatus: "PAID",
       discountAmount: 80,
       ecsStatus: "ECS_APPROVED",
@@ -103,10 +106,9 @@ export default class CustomerProfile extends Component {
         }
       ]
     };
-
-    this.setState({ tenure: val, showIcon: true });
     if (this.props.placeOrder) {
       this.props.placeOrder(orderDetails);
+      this.props.getAllOrder();
     }
   };
   render() {

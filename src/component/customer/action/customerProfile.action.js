@@ -212,10 +212,11 @@ export function getAllOrderRequesting() {
 }
 
 export function getAllOrderSuccess(orders) {
+  console.log(orders);
   return {
     type: GET_ALL_ORDER_SUCCESS,
     status: SUCCESS,
-    orders
+    orderDetails: orders
   };
 }
 
@@ -231,15 +232,12 @@ export function getAllOrder() {
   return async dispatch => {
     try {
       dispatch(getAllOrderRequesting());
-      const result = await axios.get(
-        `http://54.69.30.76:3000/orders?page=1&limit=1&search=C`,
-        {
-          headers: {
-            Authorization:
-              "Bearer 3abcd926-12d6-43ac-824f-41b0c04dc998,eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNhYmNkOTI2LTEyZDYtNDNhYy04MjRmLTQxYjBjMDRkYzk5OCIsImlhdCI6MTU3MzQ5MzE5MCwiZXhwIjoxNTc0MDk3OTkwfQ.Pb4-nlL4hyhDCAtNNCxil4j9JI1HnS8dfttmoTNqigE"
-          }
+      const result = await axios.get(`http://54.69.30.76:3000/orders`, {
+        headers: {
+          Authorization:
+            "Bearer 3abcd926-12d6-43ac-824f-41b0c04dc998,eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNhYmNkOTI2LTEyZDYtNDNhYy04MjRmLTQxYjBjMDRkYzk5OCIsImlhdCI6MTU3MzQ5MzE5MCwiZXhwIjoxNTc0MDk3OTkwfQ.Pb4-nlL4hyhDCAtNNCxil4j9JI1HnS8dfttmoTNqigE"
         }
-      );
+      });
       const resultJson = await result.data;
       if (resultJson.error) {
         throw new Error(resultJson.error);
