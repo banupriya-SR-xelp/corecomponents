@@ -55,8 +55,11 @@ export default class CustomerProfile extends Component {
       });
     const tenure =
       tenureDetails &&
-      tenureDetails.map(val => {
-        return { label: val.duration + " " + val.durationType };
+      tenureDetails[0].tenureDetails &&
+      tenureDetails[0].tenureDetails.map(val => {
+        return {
+          label: val.duration + " " + val.durationType
+        };
       });
     this.setState({ tenureDetails: tenure });
   };
@@ -87,11 +90,7 @@ export default class CustomerProfile extends Component {
       color.map(val => {
         return { label: val.color };
       });
-    const tenure =
-      this.state.tenureDetails &&
-      this.state.tenureDetails.map(val => {
-        return { label: val.duration + " " + val.durationType };
-      });
+
     console.log(this.props);
     return (
       <div className={styles.base}>
