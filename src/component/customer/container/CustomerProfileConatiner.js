@@ -31,7 +31,19 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    customerProfile: state.customerProfile
+    customerProfile: state.customerProfile,
+    categoryDetails:
+      state.customerProfile &&
+      state.customerProfile.categoryDetails &&
+      state.customerProfile.categoryDetails.data,
+    products:
+      state.customerProfile &&
+      state.customerProfile.products &&
+      state.customerProfile.products.data,
+    productDetails:
+      state.customerProfile &&
+      state.customerProfile.productDetails &&
+      state.customerProfile.productDetails.data
   };
 };
 

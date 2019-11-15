@@ -48,7 +48,12 @@ export function getAllProductCatg() {
   return async dispatch => {
     try {
       dispatch(getAllProductCatgRequesting());
-      const result = await axios.get(" http://54.69.30.76:3000/categories");
+      const result = await axios.get(" http://54.69.30.76:3000/categories", {
+        headers: {
+          Authorization:
+            "Bearer 3abcd926-12d6-43ac-824f-41b0c04dc998,eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNhYmNkOTI2LTEyZDYtNDNhYy04MjRmLTQxYjBjMDRkYzk5OCIsImlhdCI6MTU3MzQ5MzE5MCwiZXhwIjoxNTc0MDk3OTkwfQ.Pb4-nlL4hyhDCAtNNCxil4j9JI1HnS8dfttmoTNqigE"
+        }
+      });
       const resultJson = await result.data;
       if (resultJson.error) {
         throw new Error(resultJson.error);
@@ -83,12 +88,18 @@ export function getProductByIdFailure(error) {
   };
 }
 
-export function getProductById(product_id) {
+export function getProductById(product) {
   return async dispatch => {
     try {
       dispatch(getProductByIdRequesting());
       const result = await axios.get(
-        `http://54.69.30.76:3000/products/category/3?page=1&limit=10&search=${product_id}`
+        `http://54.69.30.76:3000/products/category/${product.id}`,
+        {
+          headers: {
+            Authorization:
+              "Bearer 3abcd926-12d6-43ac-824f-41b0c04dc998,eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNhYmNkOTI2LTEyZDYtNDNhYy04MjRmLTQxYjBjMDRkYzk5OCIsImlhdCI6MTU3MzQ5MzE5MCwiZXhwIjoxNTc0MDk3OTkwfQ.Pb4-nlL4hyhDCAtNNCxil4j9JI1HnS8dfttmoTNqigE"
+          }
+        }
       );
       const resultJson = await result.data;
       if (resultJson.error) {
@@ -128,7 +139,12 @@ export function getProductDetails(id) {
   return async dispatch => {
     try {
       dispatch(getProductDetailsRequesting());
-      const result = await axios.get(`http://54.69.30.76:3000/products/${id}`);
+      const result = await axios.get(`http://54.69.30.76:3000/product/${id}`, {
+        headers: {
+          Authorization:
+            "Bearer 3abcd926-12d6-43ac-824f-41b0c04dc998,eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNhYmNkOTI2LTEyZDYtNDNhYy04MjRmLTQxYjBjMDRkYzk5OCIsImlhdCI6MTU3MzQ5MzE5MCwiZXhwIjoxNTc0MDk3OTkwfQ.Pb4-nlL4hyhDCAtNNCxil4j9JI1HnS8dfttmoTNqigE"
+        }
+      });
       const resultJson = await result.data;
       if (resultJson.error) {
         throw new Error(resultJson.error);
@@ -169,7 +185,13 @@ export function placeOrder(orderDetails) {
       dispatch(placeOrderRequesting());
       const result = await axios.post(
         `http://54.69.30.76:3000/order`,
-        orderDetails
+        orderDetails,
+        {
+          headers: {
+            Authorization:
+              "Bearer 3abcd926-12d6-43ac-824f-41b0c04dc998,eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNhYmNkOTI2LTEyZDYtNDNhYy04MjRmLTQxYjBjMDRkYzk5OCIsImlhdCI6MTU3MzQ5MzE5MCwiZXhwIjoxNTc0MDk3OTkwfQ.Pb4-nlL4hyhDCAtNNCxil4j9JI1HnS8dfttmoTNqigE"
+          }
+        }
       );
       const resultJson = await result.data;
       if (resultJson.error) {
@@ -210,7 +232,13 @@ export function getAllOrder() {
     try {
       dispatch(getAllOrderRequesting());
       const result = await axios.get(
-        `http://54.69.30.76:3000/orders?page=1&limit=1&search=C`
+        `http://54.69.30.76:3000/orders?page=1&limit=1&search=C`,
+        {
+          headers: {
+            Authorization:
+              "Bearer 3abcd926-12d6-43ac-824f-41b0c04dc998,eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNhYmNkOTI2LTEyZDYtNDNhYy04MjRmLTQxYjBjMDRkYzk5OCIsImlhdCI6MTU3MzQ5MzE5MCwiZXhwIjoxNTc0MDk3OTkwfQ.Pb4-nlL4hyhDCAtNNCxil4j9JI1HnS8dfttmoTNqigE"
+          }
+        }
       );
       const resultJson = await result.data;
       if (resultJson.error) {
