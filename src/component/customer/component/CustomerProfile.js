@@ -18,7 +18,8 @@ export default class CustomerProfile extends Component {
       product: null,
       tenure: null,
       tenureDetails: null,
-      showIcon: false
+      showIcon: false,
+      selectedProducts: []
     };
   }
   componentDidMount() {
@@ -70,7 +71,7 @@ export default class CustomerProfile extends Component {
   handleTenureSelect = val => {
     this.setState({ tenure: val, showIcon: true });
   };
-  addRow = () => {
+  saveorder = () => {
     let orderDetails = {
       customerId: "4c291fed-0cd0-4745-9608-67ff0bf5f3ec",
       paymentStatus: "PAID",
@@ -112,6 +113,26 @@ export default class CustomerProfile extends Component {
       this.props.getAllOrder();
     }
   };
+  addRow = () => {
+    let products = this.state.selectedProducts;
+    let product = {
+      Varient: this.state.tenure,
+      Category: this.state.productCategory,
+      product: this.state.product,
+      tenure: this.state.tenure
+    };
+    products.push(product);
+    this.setState({
+      selectedProducts: products,
+      productAttribute: null,
+      productCategory: null,
+      productCategoryId: null,
+      product: null,
+      tenure: null,
+      tenureDetails: null,
+      showIcon: false
+    });
+  };
   render() {
     const catg_Details =
       this.props.categoryDetails &&
@@ -140,7 +161,7 @@ export default class CustomerProfile extends Component {
         return { label: val.color };
       });
 
-    console.log(this.props);
+    console.log(this.state.selectedProducts);
     return (
       <div className={styles.base}>
         <div className={styles.heading}>CustomerProfile</div>
@@ -199,37 +220,6 @@ export default class CustomerProfile extends Component {
             </div>
           )}
         </div>
-        {this.props.placeOrderLoader ? (
-          <div className={styles.loader}>
-            <Loader />
-          </div>
-        ) : (
-          this.props.orderDetails && (
-            <div className={styles.tableSection}>
-             <Table
-            headers={[
-              { value: "name" },
-              { value: "email" },
-              { value: "contactNumber" },
-              { value: "discountAmount" },
-              { value: "dmiApprovalDate" },
-              { value: "dmiStatus" },
-              { value: "ecsStatus" },
-              { value: "amount" },
-              { value: "product name" },
-              { value: "product attribute" },
-              { value: "tenureDetails" },
-            ]}
-            formElements={this.props.orderDetails}
-          />
-            </div>
-          )
-        )}
-
-        { this.props.orderDetails && <div className={styles.addressContainer}>
-          <div className={styles.address}>address1</div>
-          <div className={styles.address}>address2</div>
-        </div>}
       </div>
     );
   }
