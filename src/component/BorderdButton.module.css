@@ -1,0 +1,14 @@
+.buttonBase {
+  width: 100%;
+  height: 100%;
+}
+.buttonHolder {
+  text-align: center;
+}
+.buttonText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
