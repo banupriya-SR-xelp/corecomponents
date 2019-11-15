@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Select from "react-select";
 import styles from "./CustomerProfile.css";
+import Table from "./TableForm";
 const options = [
   { value: "chocolate", label: "Chocolate" },
   { value: "strawberry", label: "Strawberry" },
@@ -188,6 +189,21 @@ export default class CustomerProfile extends Component {
               </div>
             </div>
           )}
+        </div>
+      
+
+        <div className={styles.tableSection}>
+          <Table
+            headers={[
+              { value: "productAttribute" },
+              { value: "productCategory" },
+              { value: "product" },
+              { value: "tenure" }
+              // { value: "rent" },
+              // { value: "refundableDeposit" }
+            ]}
+            // formElements={this.state.totalSelection}
+          />
         </div>
       </div>
     );
