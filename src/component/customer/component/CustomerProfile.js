@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Select from "react-select";
 import styles from "./CustomerProfile.css";
 import Table from "./TableForm";
+import Loader from "./Loader";
 const options = [
   { value: "chocolate", label: "Chocolate" },
   { value: "strawberry", label: "Strawberry" },
@@ -154,6 +155,7 @@ export default class CustomerProfile extends Component {
               />
             </div>
           )}
+          {this.state.productCategory && !products && <Loader />}
           {products && (
             <div className={styles.dropdown}>
               <Select
@@ -164,6 +166,7 @@ export default class CustomerProfile extends Component {
               />
             </div>
           )}
+          {this.state.product && !varient && <Loader />}
           {varient && (
             <div className={styles.dropdown}>
               <Select
@@ -173,6 +176,9 @@ export default class CustomerProfile extends Component {
                 value={this.state.productAttribute}
               />
             </div>
+          )}
+          {this.state.productAttribute && !this.state.tenureDetails && (
+            <Loader />
           )}
           {this.state.tenureDetails && (
             <div className={styles.dropdown}>
@@ -184,6 +190,7 @@ export default class CustomerProfile extends Component {
               />
             </div>
           )}
+
           {this.state.showIcon && (
             <div className={styles.button}>
               <div className={styles.addButton} onClick={() => this.addRow()}>
@@ -192,21 +199,27 @@ export default class CustomerProfile extends Component {
             </div>
           )}
         </div>
-      
-
-        <div className={styles.tableSection}>
-          <Table
-            headers={[
-              { value: "productAttribute" },
-              { value: "productCategory" },
-              { value: "product" },
-              { value: "tenure" }
-              // { value: "rent" },
-              // { value: "refundableDeposit" }
-            ]}
-            // formElements={this.state.totalSelection}
-          />
-        </div>
+        {this.props.placeOrderLoader ? (
+          <div className={styles.loader}>
+            <Loader />
+          </div>
+        ) : (
+          this.props.orderDetails && (
+            <div className={styles.tableSection}>
+              <Table
+                headers={[
+                  { value: "productAttribute" },
+                  { value: "productCategory" },
+                  { value: "product" },
+                  { value: "tenure" }
+                  // { value: "rent" },
+                  // { value: "refundableDeposit" }
+                ]}
+                // formElements={this.state.totalSelection}
+              />
+            </div>
+          )
+        )}
       </div>
     );
   }

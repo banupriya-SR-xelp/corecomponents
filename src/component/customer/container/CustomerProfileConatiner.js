@@ -47,7 +47,9 @@ const mapStateToProps = state => {
     orderDetails:
       state.customerProfile &&
       state.customerProfile.orderDetails &&
-      state.customerProfile.orderDetails.data
+      state.customerProfile.orderDetails.data,
+    placeOrderLoader:
+      state.customerProfile && state.customerProfile.placeOrderLoader
   };
 };
 
