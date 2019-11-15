@@ -212,7 +212,6 @@ export function getAllOrderRequesting() {
 }
 
 export function getAllOrderSuccess(orders) {
-  console.log(orders);
   return {
     type: GET_ALL_ORDER_SUCCESS,
     status: SUCCESS,

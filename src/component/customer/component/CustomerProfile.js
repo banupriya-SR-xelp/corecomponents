@@ -3,11 +3,7 @@ import Select from "react-select";
 import styles from "./CustomerProfile.css";
 import CustomerProfileTable from "./CustomerProfileTable";
 import Loader from "./Loader";
-const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" }
-];
+import { getCookie } from "../../lib/constant.js";
 export default class CustomerProfile extends Component {
   constructor(props) {
     super(props);
@@ -21,7 +17,9 @@ export default class CustomerProfile extends Component {
       showIcon: false,
       selectedProducts: [],
       address1: false,
-      address2: false
+      address2: false,
+      productId: null,
+      productAttributeId: null
     };
   }
   componentDidMount() {
@@ -46,6 +44,7 @@ export default class CustomerProfile extends Component {
       return val.name == product.label;
     });
     if (this.props.getProductById) {
+      this.setState({ productId: products[0].id });
       this.props.getProductDetails(products[0].id);
     }
   };
@@ -57,14 +56,17 @@ export default class CustomerProfile extends Component {
       this.props.productDetails &&
       this.props.productDetails &&
       this.props.productDetails.productattributes.filter(data => {
-        return data.variants && data.variants.color == val.label;
+        if (data.variants && data.variants.color == val.label) {
+          this.setState({ productAttributeId: data.id });
+          return data;
+        }
       });
     const tenure =
       tenureDetails &&
       tenureDetails[0].tenureDetails &&
       tenureDetails[0].tenureDetails.map(val => {
         return {
-          label: val.duration + " " + val.durationType
+          label: val.duration + " " + val.durationType + " " + val.tenureAmount
         };
       });
     this.setState({ tenureDetails: tenure });
@@ -73,45 +75,37 @@ export default class CustomerProfile extends Component {
   handleTenureSelect = val => {
     this.setState({ tenure: val, showIcon: true });
   };
-  submit = () => {
-    let orderDetails = {
-      customerId: "4c291fed-0cd0-4745-9608-67ff0bf5f3ec",
-      paymentStatus: "PAID", //hardcode
-      discountAmount: 80, //null
-      ecsStatus: "ECS_APPROVED", //hardcode
-      dmiStatus: "DOCUMENT_VERIFIED", //hardcode
+  saveorder = () => {
+    let orderDetails = [];
+    this.state.selectedProducts &&
+      this.state.selectedProducts.map(val => {
+        let tenure = val.tenure.label.split(" ");
+        let product = {
+          productId: val.productId,
+          productAttributeId: val.productAttributeId,
+          slotType: 1,
+          amount: tenure[2],
+          tenureDetails: {
+            duration: tenure[0],
+            durationType: tenure[1],
+            tenureAmount: tenure[2]
+          },
+          ekycStatus: "VERIFIED",
+          status: "ORDER_PLACED"
+        };
+        return orderDetails.push(product);
+      });
+    let orders = {
+      customerId: getCookie("userId"),
+      paymentStatus: "PAID",
+      discountAmount: 80,
+      ecsStatus: "ECS_APPROVED",
+      dmiStatus: "DOCUMENT_VERIFIED",
       dmiApprovalDate: "2019-10-05 10:38:56",
-      orderDetails: [
-        {
-          productId: 302,
-          productAttributeId: 121,
-          slotType: 1, //hardcode
-          amount: 5000,
-          tenureDetails: {
-            duration: 3,
-            durationType: "Month",
-            tenureAmount: 2000
-          },
-          ekycStatus: "VERIFIED", //hardcode
-          status: "ORDER_PLACED" //hardcode
-        },
-        {
-          productId: 279,
-          productAttributeId: 120,
-          slotType: 1, //hardcode
-          amount: 1000,
-          tenureDetails: {
-            duration: 1,
-            durationType: "Month",
-            tenureAmount: 500
-          },
-          ekycStatus: "VERIFIED", //hardcode
-          status: "ORDER_PLACED" //hardcode
-        }
-      ]
+      orderDetails
     };
     if (this.props.placeOrder) {
-      this.props.placeOrder(orderDetails);
+      this.props.placeOrder(orders);
       this.props.history.push("/customerDetails");
     }
   };
@@ -121,6 +115,9 @@ export default class CustomerProfile extends Component {
       Varient: this.state.tenure,
       Category: this.state.productCategory,
       product: this.state.product,
+      tenure: this.state.tenure,
+      productId: this.state.productId,
+      productAttributeId: this.state.productAttributeId,
       tenure: this.state.tenure
     };
     products.push(product);
@@ -132,7 +129,10 @@ export default class CustomerProfile extends Component {
       product: null,
       tenure: null,
       tenureDetails: null,
-      showIcon: false
+      showIcon: false,
+      productId: null,
+      productAttributeId: null,
+      tenure: null
     });
   };
   render() {
@@ -162,8 +162,6 @@ export default class CustomerProfile extends Component {
       color.map(val => {
         return { label: val.color };
       });
-
-    console.log(this.state.selectedProducts);
     return (
       <div className={styles.base}>
         <div className={styles.heading}>CustomerProfile</div>
@@ -263,14 +261,14 @@ export default class CustomerProfile extends Component {
         )}
         {this.state.selectedProducts && this.state.selectedProducts.length > 0 && (
           <div className={styles.submitButtonConatiner}>
-          <div
-            className={styles.submitButton}
-            onClick={() => {
-              this.submit();
-            }}
-          >
-            submit
-          </div>
+            <div
+              className={styles.submitButton}
+              onClick={() => {
+                this.saveorder();
+              }}
+            >
+              submit
+            </div>
           </div>
         )}
       </div>
