@@ -14,7 +14,8 @@ export default class CustomerProfile extends Component {
       productCategory: null,
       productCategoryId: null,
       product: null,
-      tenure: null
+      tenure: null,
+      tenureDetails: null
     };
   }
   componentDidMount() {
@@ -42,6 +43,23 @@ export default class CustomerProfile extends Component {
       this.props.getProductDetails(products[0].id);
     }
   };
+  hadleVarientSelect = val => {
+    this.setState({
+      productAttribute: val
+    });
+    const tenureDetails =
+      this.props.productDetails &&
+      this.props.productDetails &&
+      this.props.productDetails.productattributes.filter(data => {
+        return data.variants && data.variants.color == val.label;
+      });
+    const tenure =
+      tenureDetails &&
+      tenureDetails.map(val => {
+        return { label: val.duration + " " + val.durationType };
+      });
+    this.setState({ tenureDetails: tenure });
+  };
   render() {
     const catg_Details =
       this.props.categoryDetails &&
@@ -53,8 +71,27 @@ export default class CustomerProfile extends Component {
       this.props.products.map(val => {
         return { label: val.name };
       });
-    const attributes = null;
-    const tenure = null;
+    const color_attributes =
+      this.props.productDetails &&
+      this.props.productDetails &&
+      this.props.productDetails.productattributes.map(val => {
+        return val.variants;
+      });
+    const color =
+      color_attributes &&
+      color_attributes.filter(val => {
+        return val.color;
+      });
+    const varient =
+      color &&
+      color.map(val => {
+        return { label: val.color };
+      });
+    const tenure =
+      this.state.tenureDetails &&
+      this.state.tenureDetails.map(val => {
+        return { label: val.duration + " " + val.durationType };
+      });
     console.log(this.props);
     return (
       <div className={styles.base}>
@@ -80,24 +117,20 @@ export default class CustomerProfile extends Component {
               />
             </div>
           )}
-          {attributes && (
+          {varient && (
             <div className={styles.dropdown}>
               <Select
-                options={attributes}
-                placeholder={"attribute"}
-                onChange={val =>
-                  this.setState({
-                    productAttribute: val
-                  })
-                }
+                options={varient}
+                placeholder={"Varients"}
+                onChange={val => this.hadleVarientSelect(val)}
                 value={this.state.productAttribute}
               />
             </div>
           )}
-          {tenure && (
+          {this.state.tenureDetails && (
             <div className={styles.dropdown}>
               <Select
-                options={tenure}
+                options={this.state.tenureDetails}
                 placeholder={"tenure"}
                 onChange={val =>
                   this.setState({
