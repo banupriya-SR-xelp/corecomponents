@@ -15,7 +15,8 @@ export default class CustomerProfile extends Component {
       productCategoryId: null,
       product: null,
       tenure: null,
-      tenureDetails: null
+      tenureDetails: null,
+      showIcon: false
     };
   }
   componentDidMount() {
@@ -62,6 +63,50 @@ export default class CustomerProfile extends Component {
         };
       });
     this.setState({ tenureDetails: tenure });
+  };
+
+  handleTenureSelect = val => {
+    let orderDetails = {
+      customerId: "a33cef5c-268f-4a8d-a831-ed9c1563edaa",
+      paymentStatus: "PAID",
+      discountAmount: 80,
+      ecsStatus: "ECS_APPROVED",
+      dmiStatus: "DOCUMENT_VERIFIED",
+      dmiApprovalDate: "2019-10-05 10:38:56",
+      orderDetails: [
+        {
+          productId: 302,
+          productAttributeId: 121,
+          slotType: 1,
+          amount: 5000,
+          tenureDetails: {
+            duration: 3,
+            durationType: "Month",
+            tenureAmount: 2000
+          },
+          ekycStatus: "VERIFIED",
+          status: "ORDER_PLACED"
+        },
+        {
+          productId: 279,
+          productAttributeId: 120,
+          slotType: 1,
+          amount: 1000,
+          tenureDetails: {
+            duration: 1,
+            durationType: "Month",
+            tenureAmount: 500
+          },
+          ekycStatus: "VERIFIED",
+          status: "ORDER_PLACED"
+        }
+      ]
+    };
+
+    this.setState({ tenure: val, showIcon: true });
+    if (this.props.placeOrder) {
+      this.props.placeOrder(orderDetails);
+    }
   };
   render() {
     const catg_Details =
@@ -131,19 +176,19 @@ export default class CustomerProfile extends Component {
               <Select
                 options={this.state.tenureDetails}
                 placeholder={"tenure"}
-                onChange={val =>
-                  this.setState({
-                    tenure: val
-                  })
-                }
+                onChange={val => this.handleTenureSelect(val)}
                 value={this.state.tenure}
               />
             </div>
           )}
+          {this.state.showIcon && (
+            <div className={styles.button}>
+              <div className={styles.addButton} onClick={() => this.addRow()}>
+                +
+              </div>
+            </div>
+          )}
         </div>
-        <div className={styles.addButton} onClick={() => this.addRow()}>
-            +
-          </div>
       </div>
     );
   }
