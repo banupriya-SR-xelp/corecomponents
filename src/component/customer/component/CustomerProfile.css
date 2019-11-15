@@ -76,3 +76,22 @@
     margin-right: 10px;
     color: white;
 }
+.submitButtonConatiner{
+  width: 100%;
+  height: auto;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 50px;
+}
+.submitButton{
+  width: 100px;
+    height: 40px;
+    background: #da1c5c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+
+}

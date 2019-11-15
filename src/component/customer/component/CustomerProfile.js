@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Select from "react-select";
 import styles from "./CustomerProfile.css";
-import Table from "./TableForm";
+import CustomerProfileTable from "./CustomerProfileTable";
 import Loader from "./Loader";
 const options = [
   { value: "chocolate", label: "Chocolate" },
@@ -19,7 +19,9 @@ export default class CustomerProfile extends Component {
       tenure: null,
       tenureDetails: null,
       showIcon: false,
-      selectedProducts: []
+      selectedProducts: [],
+      address1: false,
+      address2: false
     };
   }
   componentDidMount() {
@@ -71,46 +73,46 @@ export default class CustomerProfile extends Component {
   handleTenureSelect = val => {
     this.setState({ tenure: val, showIcon: true });
   };
-  saveorder = () => {
+  submit = () => {
     let orderDetails = {
       customerId: "4c291fed-0cd0-4745-9608-67ff0bf5f3ec",
-      paymentStatus: "PAID",
-      discountAmount: 80,
-      ecsStatus: "ECS_APPROVED",
-      dmiStatus: "DOCUMENT_VERIFIED",
+      paymentStatus: "PAID", //hardcode
+      discountAmount: 80, //null
+      ecsStatus: "ECS_APPROVED", //hardcode
+      dmiStatus: "DOCUMENT_VERIFIED", //hardcode
       dmiApprovalDate: "2019-10-05 10:38:56",
       orderDetails: [
         {
           productId: 302,
           productAttributeId: 121,
-          slotType: 1,
+          slotType: 1, //hardcode
           amount: 5000,
           tenureDetails: {
             duration: 3,
             durationType: "Month",
             tenureAmount: 2000
           },
-          ekycStatus: "VERIFIED",
-          status: "ORDER_PLACED"
+          ekycStatus: "VERIFIED", //hardcode
+          status: "ORDER_PLACED" //hardcode
         },
         {
           productId: 279,
           productAttributeId: 120,
-          slotType: 1,
+          slotType: 1, //hardcode
           amount: 1000,
           tenureDetails: {
             duration: 1,
             durationType: "Month",
             tenureAmount: 500
           },
-          ekycStatus: "VERIFIED",
-          status: "ORDER_PLACED"
+          ekycStatus: "VERIFIED", //hardcode
+          status: "ORDER_PLACED" //hardcode
         }
       ]
     };
     if (this.props.placeOrder) {
       this.props.placeOrder(orderDetails);
-      this.props.getAllOrder();
+      this.props.history.push("/customerDetails");
     }
   };
   addRow = () => {
@@ -220,6 +222,57 @@ export default class CustomerProfile extends Component {
             </div>
           )}
         </div>
+
+        {this.state.selectedProducts && this.state.selectedProducts.length > 0 && (
+          <div className={styles.tableSection}>
+            <CustomerProfileTable
+              headers={[
+                { value: "Category" },
+                { value: "product" },
+                { value: "Varient" },
+                { value: "tenure" },
+                { value: "quantity" }
+              ]}
+              formElements={this.state.selectedProducts}
+            />
+          </div>
+        )}
+        {this.state.selectedProducts && this.state.selectedProducts.length > 0 && (
+          <div className={styles.addressContainer}>
+            <div
+              className={
+                this.state.address1 ? styles.addressActive : styles.address
+              }
+              onClick={() => {
+                this.setState({ address1: true, address2: false });
+              }}
+            >
+              address1
+            </div>
+            <div
+              className={
+                this.state.address2 ? styles.addressActive : styles.address
+              }
+              onClick={() => {
+                this.setState({ address1: false, address2: true });
+              }}
+            >
+              address2
+            </div>
+          </div>
+        )}
+        {this.state.selectedProducts && this.state.selectedProducts.length > 0 && (
+          <div className={styles.submitButtonConatiner}>
+          <div
+            className={styles.submitButton}
+            onClick={() => {
+              this.submit();
+            }}
+          >
+            submit
+          </div>
+          </div>
+        )}
       </div>
     );
   }

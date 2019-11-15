@@ -4,7 +4,6 @@ import  styles from "./TableForm.css";
 class Table extends Component {
   state = {};
   render() {
-
     return (
       <table className={styles.table}>
         <tr>
