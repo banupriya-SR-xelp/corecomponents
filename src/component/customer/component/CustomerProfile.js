@@ -2,28 +2,28 @@ import React, { Component } from "react";
 import Select from "react-select";
 import styles from "./CustomerProfile.css";
 const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' }
-]
+  { value: "chocolate", label: "Chocolate" },
+  { value: "strawberry", label: "Strawberry" },
+  { value: "vanilla", label: "Vanilla" }
+];
 export default class CustomerProfile extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       productAttribute: null,
       productCategory: null,
       productCategoryId: null,
       product: null,
-      tenure: null,
+      tenure: null
+    };
   }
-}
   render() {
-    console.log(this.state)
+    console.log(this.state, this.props);
     return (
       <div className={styles.base}>
         <div className={styles.heading}>CustomerProfile</div>
         <div className={styles.container}>
-        <div className={styles.dropdown}>
+          <div className={styles.dropdown}>
             <Select
               options={options}
               placeholder={"category"}
@@ -71,7 +71,7 @@ export default class CustomerProfile extends Component {
               value={this.state.tenure}
             />
           </div>
-          </div>
+        </div>
       </div>
     );
   }

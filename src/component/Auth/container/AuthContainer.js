@@ -16,7 +16,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    userDetails: state
+    userDetails: state.AuthReducer
   };
 };
 
