@@ -141,6 +141,9 @@ export default class CustomerProfile extends Component {
             </div>
           )}
         </div>
+        <div className={styles.addButton} onClick={() => this.addRow()}>
+            +
+          </div>
       </div>
     );
   }
