@@ -47,7 +47,10 @@ export default class Auth extends Component {
         password: this.state.password
       };
       this.props.userSignUp(userDetails);
+     
+      this.props.history.push("/customerProfile")
     }
+    
   };
   handleLogin = () => {
     if (this.props.userLogin) {

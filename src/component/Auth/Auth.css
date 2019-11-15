@@ -8,12 +8,14 @@
     width: 50%;
     height: 100%;
     background: lightyellow;
+    vertical-align: top;
 }
 .loginBase{
     width: 50%;
     display: inline-block;
     height: 100%;
     background: lightblue;
+    vertical-align: top;
 }
 .container{
     display: flex;
