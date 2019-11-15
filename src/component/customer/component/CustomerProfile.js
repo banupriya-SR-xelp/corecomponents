@@ -206,20 +206,30 @@ export default class CustomerProfile extends Component {
         ) : (
           this.props.orderDetails && (
             <div className={styles.tableSection}>
-              <Table
-                headers={[
-                  { value: "productAttribute" },
-                  { value: "productCategory" },
-                  { value: "product" },
-                  { value: "tenure" }
-                  // { value: "rent" },
-                  // { value: "refundableDeposit" }
-                ]}
-                // formElements={this.state.totalSelection}
-              />
+             <Table
+            headers={[
+              { value: "name" },
+              { value: "email" },
+              { value: "contactNumber" },
+              { value: "discountAmount" },
+              { value: "dmiApprovalDate" },
+              { value: "dmiStatus" },
+              { value: "ecsStatus" },
+              { value: "amount" },
+              { value: "product name" },
+              { value: "product attribute" },
+              { value: "tenureDetails" },
+            ]}
+            formElements={this.props.orderDetails}
+          />
             </div>
           )
         )}
+
+        { this.props.orderDetails && <div className={styles.addressContainer}>
+          <div className={styles.address}>address1</div>
+          <div className={styles.address}>address2</div>
+        </div>}
       </div>
     );
   }

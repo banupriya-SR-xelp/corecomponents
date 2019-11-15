@@ -31,11 +31,11 @@
   background: red;
 }
 .tableSection {
-  width: auto;
-  height: 500px;
-  display: flex;
-  justify-content: center;
-  margin-top: 50px;
+    width:auto;
+    height:500px;
+    display: flex;
+   justify-content: center;
+    margin-top: 50px;
 }
 
 .loader {
@@ -43,4 +43,36 @@
   height: 200px;
   display: flex;
   justify-content: center;
+}
+
+.addressContainer{
+    width: 100%;
+    height: auto;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 100px;
+}
+.address{
+    padding: 5px;
+    width: 100px;
+    height: 50px;
+    border: 1px solid #212121;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px; 
+}
+.addressActive{
+    padding: 5px;
+    width: 100px;
+    height: 50px;
+    background: #da1c5c;
+   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    color: white;
 }

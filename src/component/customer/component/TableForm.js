@@ -4,9 +4,10 @@ import  styles from "./TableForm.css";
 class Table extends Component {
   state = {};
   render() {
-    // this.props.formElements.map((item, index) => {
-    //   console.log(item);
-    // });
+    this.props.formElements.map((item, index) => {
+      console.log(item);
+    });
+
     return (
       <table className={styles.table}>
         <tr>
@@ -14,18 +15,23 @@ class Table extends Component {
             <th key={index} className={styles.th}>{item.value}</th>
           ))}
         </tr>
-        {/* <tbody>
+        <tbody>
           {this.props.formElements.map((item, index) => (
             <tr key={index}>
-              <td className={styles.td}>hello</td>
-              <td className={styles.td}>{item.productCategory.label}</td>
-              <td className={styles.td}>{item.product.label}</td>
-              <td className={styles.td}>{item.tenure.label}</td>
-              <td className={styles.td}>{item.rent.label}</td>
-              <td className={styles.td}>{item.refundableDeposit.label}</td>
+              <td className={styles.td}>{item.user&&item.user.name&&item.user.name}</td>
+              <td className={styles.td}>{item.user&&item.user.email&&item.user.email}</td>
+              <td className={styles.td}>{item.user&&item.user.contactNumber&&item.user.contactNumber}</td>
+              <td className={styles.td}>{item.discountAmount}</td>
+              <td className={styles.td}>{item.dmiApprovalDate}</td>
+              <td className={styles.td}>{item.dmiStatus}</td>
+              <td className={styles.td}>{item.ecsStatus}</td>
+              <td className={styles.td}>{item.orderdetails[0].amount}</td>
+              <td className={styles.td}>{item.orderdetails[0].product.name}</td>
+              <td className={styles.td}>{item.orderdetails[0].productattribute.variants.Color}</td>
+          <td className={styles.td}>{item.orderdetails[0].tenureDetails.duration}{" "}{item.orderdetails[0].tenureDetails.durationType}</td>
             </tr>
           ))}
-        </tbody> */}
+        </tbody>
       </table>
     );
   }
