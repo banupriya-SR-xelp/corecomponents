@@ -6,14 +6,16 @@ export default class Auth extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      emailValue: "",
+      email: "",
       password: "",
-      confirmPassword: ""
+      confirmPassword: "",
+      name: "",
+      contactNumber: ""
     };
   }
-  onChangeEmail = emailValue => {
+  onChangeEmail = email => {
     this.setState({
-      emailValue
+      email
     });
   };
   onChangePassword = password => {
@@ -26,6 +28,36 @@ export default class Auth extends Component {
       confirmPassword
     });
   };
+  onChangeName = name => {
+    this.setState({
+      name
+    });
+  };
+  onChangeContactNumber = contactNumber => {
+    this.setState({
+      contactNumber
+    });
+  };
+  handleSignUp = () => {
+    if (this.props.userSignUp) {
+      let userDetails = {
+        name: this.state.name,
+        email: this.state.email,
+        contactNumber: this.state.contactNumber,
+        password: this.state.password
+      };
+      this.props.userSignUp(userDetails);
+    }
+  };
+  handleLogin = () => {
+    if (this.props.userLogin) {
+      let userDetails = {
+        email: this.state.email,
+        password: this.state.confirmPassword
+      };
+      this.props.userLogin(userDetails);
+    }
+  };
   render() {
     return (
       <div className={styles.base}>
@@ -35,11 +67,30 @@ export default class Auth extends Component {
               <div className={styles.signUp}>SignUp</div>
               <div className={styles.inputContainer}>
                 <Input
+                  placeholder={"name"}
+                  value={this.state.name}
+                  onChange={val => this.onChangeName(val)}
+                  fontSize={14}
+                  maxLength={240}
+                />
+              </div>
+              <div className={styles.inputContainer}>
+                <Input
                   placeholder={"Email"}
                   value={this.state.emailValue}
                   onChange={val => this.onChangeEmail(val)}
                   fontSize={14}
                   maxLength={240}
+                />
+              </div>
+              <div className={styles.inputContainer}>
+                <Input
+                  placeholder={"contactNumber"}
+                  value={this.state.contactNumber}
+                  onChange={val => this.onChangeContactNumber(val)}
+                  fontSize={14}
+                  type={"number"}
+                  maxLength={10}
                 />
               </div>
               <div className={styles.inputContainer}>
@@ -52,7 +103,7 @@ export default class Auth extends Component {
                   maxLength={240}
                 />
               </div>
-              <div className={styles.inputContainer}>
+              {/* <div className={styles.inputContainer}>
                 <Input
                   type={"password"}
                   placeholder={"Confirm Password"}
@@ -61,8 +112,13 @@ export default class Auth extends Component {
                   fontSize={14}
                   maxLength={240}
                 />
+              </div> */}
+              <div
+                className={styles.button}
+                onClick={() => this.handleSignUp()}
+              >
+                signUp
               </div>
-              <div className={styles.button}>signUp</div>
             </div>
           </div>
         </div>
@@ -90,7 +146,9 @@ export default class Auth extends Component {
                   maxLength={240}
                 />
               </div>
-              <div className={styles.button}>Login</div>
+              <div className={styles.button} onClick={() => this.handleLogin()}>
+                Login
+              </div>
             </div>
           </div>
         </div>
