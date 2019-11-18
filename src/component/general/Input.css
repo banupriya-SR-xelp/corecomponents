@@ -1,0 +1,119 @@
+.container {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .inputBox {
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: 0 8px;
+    color: #212121;
+    -webkit-appearance: none;
+    background-color: transparent;
+  }
+  
+  .inputBox:-webkit-autofill,
+  .inputBox:-webkit-autofill:focus {
+    color: transparent;
+    background-color: transparent !important;
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+  
+  .inputBox::placeholder {
+    color: #8d8d8d;
+    }
+  
+  .wrapper {
+    composes: container;
+  }
+  .base {
+    width: 100%;
+    height: auto;
+    position: relative;
+    border-radius: 2px;
+  }
+  .hollow {
+    composes: base;
+    border: none;
+    border-bottom: 2px solid #d3d3d3;
+  }
+  
+  .whiteHollow {
+    composes: container;
+    color: #fff;
+  }
+  .whiteBox {
+    composes: container;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 2px;
+  }
+  .inputBox::placeholder {
+    color: #8d8d8d;
+  }
+  .whiteHollow .hollow,
+  .whiteBox .box {
+    border: 0px;
+  }
+  .whiteHollow .inputBox,
+  .whiteBox .inputBox {
+    color: #fff;
+  }
+  .whiteHollow .inputBox::placeholder,
+  .whiteBox .inputBox::placeholder {
+    color: #fff;
+    opacity: 0.5;
+  }
+  .box {
+    composes: base;
+    border: 1px;
+    border-color: #d2d2d2;
+    border-style: solid;
+  }
+  .inputBox:focus {
+    outline: none;
+  }
+  .focused {
+    composes: base;
+    border: 0px;
+    border-bottom-color: #d3d3d3;
+    border-bottom-style: solid;
+  }
+  .disabled {
+    composes: base;
+    opacity: 0.5;
+    pointer-events: none;
+    border-bottom-color: #d3d3d3;
+    border-bottom-style: solid;
+  }
+  .boxIconLeft {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .boxIconRight {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  input[type="search"]::-webkit-search-decoration,
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-results-button,
+  input[type="search"]::-webkit-search-results-decoration {
+    display: none;
+  }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+  }
+  @media only screen and (min-width: 1025px) {
+    .inputBox::-webkit-input-placeholder {
+      font-family: light;
+    }
+  }
+  

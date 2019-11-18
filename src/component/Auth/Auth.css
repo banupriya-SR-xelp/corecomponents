@@ -1,0 +1,49 @@
+.base{
+    width: 100%;
+    height: 100vh;
+    display: inline-block;
+}
+.signUpBase{
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+    background: lightyellow;
+    vertical-align: top;
+}
+.loginBase{
+    width: 50%;
+    display: inline-block;
+    height: 100%;
+    background: lightblue;
+    vertical-align: top;
+}
+.container{
+    display: flex;
+    align-items: center;
+   justify-content: center;
+    height: 100%;
+}
+.formConatiner{
+    width: 100%;
+    height:auto;
+    padding: 10%;
+}
+.signUp{
+width: 100%;
+font-size: 28px;
+font-weight:bold;
+margin-bottom: 10px;
+}
+.inputContainer{
+    border: 1px solid #212121;
+    margin-bottom: 10px;
+}
+.button{
+    width: 100%;
+    height: 40px;
+    color: #fff;
+    background: #212121;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

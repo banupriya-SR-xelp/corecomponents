@@ -1,25 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+
+import { Route, Switch, Redirect } from "react-router-dom";
+
+import NotFound from "./component/general/NotFound";
+import AuthContainer from "./component/Auth/container/AuthContainer";
+import CustomerProfile from "./component/customer/component/CustomerProfile";
+import CustomerProfileContainer from "./component/customer/container/CustomerProfileConatiner";
+import CustomerDetailsContainer from "./component/customer/container/CustomerDetailsConatiner";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Switch>
+      <Route exact path="/" component={AuthContainer} />
+      <Route
+        exact
+        path="/customerProfile"
+        component={CustomerProfileContainer}
+      />
+       <Route
+        exact
+        path="/customerDetails"
+        component={CustomerDetailsContainer}
+      />
+      <Route exact path="/notfound" component={NotFound} />
+      <Route>
+        <Redirect to="/notfound"></Redirect>
+      </Route>
+    </Switch>
   );
 }
 
