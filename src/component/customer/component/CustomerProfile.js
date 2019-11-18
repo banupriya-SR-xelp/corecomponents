@@ -19,7 +19,9 @@ export default class CustomerProfile extends Component {
       address1: false,
       address2: false,
       productId: null,
-      productAttributeId: null
+      productAttributeId: null,
+      showProduct:false,
+      showVarients:false
     };
   }
   componentDidMount() {
@@ -34,6 +36,7 @@ export default class CustomerProfile extends Component {
     });
     if (this.props.getProductById) {
       this.props.getProductById(product[0]);
+      this.setState({showProduct:true})
     }
   };
   handleproductSelect = product => {
@@ -46,6 +49,7 @@ export default class CustomerProfile extends Component {
     if (this.props.getProductById) {
       this.setState({ productId: products[0].id });
       this.props.getProductDetails(products[0].id);
+      this.setState({showVarients:true})
     }
   };
   hadleVarientSelect = val => {
@@ -132,7 +136,9 @@ export default class CustomerProfile extends Component {
       showIcon: false,
       productId: null,
       productAttributeId: null,
-      tenure: null
+      tenure: null,
+      showProduct:false,
+      showVarients:false
     });
   };
   render() {
@@ -177,7 +183,7 @@ export default class CustomerProfile extends Component {
             </div>
           )}
           {this.state.productCategory && !products && <Loader />}
-          {products && (
+          {products && this.state.showProduct&&(
             <div className={styles.dropdown}>
               <Select
                 options={products ? products : []}
@@ -188,7 +194,7 @@ export default class CustomerProfile extends Component {
             </div>
           )}
           {this.state.product && !varient && <Loader />}
-          {varient && (
+          {varient && this.state.showVarients&& (
             <div className={styles.dropdown}>
               <Select
                 options={varient}
