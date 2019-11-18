@@ -1,9 +1,6 @@
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import {
-  getAllOrder
-
-} from "../action/customerProfile.action.js";
+import { getAllOrder } from "../action/customerProfile.action.js";
 
 import CustomerDetails from "../component/CustomerDetails.js";
 
@@ -16,13 +13,11 @@ const mapDispatchToProps = dispatch => {
 };
 
 const mapStateToProps = state => {
-    console.log(state)
   return {
     orderDetails:
       state.customerProfile &&
       state.customerProfile.orderDetails &&
-      state.customerProfile.orderDetails.data,
-   
+      state.customerProfile.orderDetails.data
   };
 };
 

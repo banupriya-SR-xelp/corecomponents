@@ -1,16 +1,15 @@
 import React, { Component } from "react";
-import styles from "./CustomerProfileTable.css"
+import styles from "./CustomerProfileTable.css";
 class CustomerProfileTable extends Component {
   state = {};
   render() {
-    this.props.formElements.map((item, index) => {
-      console.log(item);
-    });
     return (
       <table className={styles.table}>
         <tr>
           {this.props.headers.map((item, index) => (
-            <th className={styles.th} key={index}>{item.value}</th>
+            <th className={styles.th} key={index}>
+              {item.value}
+            </th>
           ))}
         </tr>
         <tbody>
@@ -21,7 +20,6 @@ class CustomerProfileTable extends Component {
               <td className={styles.td}>{item.Varient.label}</td>
               <td className={styles.td}>{item.tenure.label}</td>
               <td className={styles.td}>{"1"}</td>
-            
             </tr>
           ))}
         </tbody>

@@ -47,10 +47,9 @@ export default class Auth extends Component {
         password: this.state.password
       };
       this.props.userSignUp(userDetails);
-     
-      this.props.history.push("/customerProfile")
+
+      this.props.history.push("/customerProfile");
     }
-    
   };
   handleLogin = () => {
     if (this.props.userLogin) {
@@ -59,6 +58,7 @@ export default class Auth extends Component {
         password: this.state.confirmPassword
       };
       this.props.userLogin(userDetails);
+      this.props.history.push("/customerProfile");
     }
   };
   render() {
