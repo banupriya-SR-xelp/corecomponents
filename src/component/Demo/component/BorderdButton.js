@@ -3,11 +3,18 @@ import styles from "./BorderdButton.module.css";
 import PropTypes from "prop-types";
 export default class BorderdButton extends Component {
   handleClick = () => {
-    if (this.props.onClick) {
-      this.props.onClick();
-    }
+    console.log("here");
+
+    this.props.showCenterModule();
+    // if (this.props.onClick) {
+    //   this.props.onClick();
+    // }
   };
+  componentDidMount() {
+    this.props.displayToast("i'm toast");
+  }
   render() {
+    console.log(this.props, "button");
     return (
       <div className={styles.buttonBase}>
         <div
@@ -62,6 +69,7 @@ BorderdButton.defaultProps = {
   loading: false,
   iconHeight: 40,
   iconWidth: 40,
+  name: "Click me to see modal",
   fontcolor: "#212121",
   fontSize: 14,
   fontFamily: "ubuntu"

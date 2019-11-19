@@ -1,12 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "../src/App.js";
+import thunk from "redux-thunk";
+import { Provider } from "react-redux";
+import "babel-polyfill";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import "./index.css";
+import { BrowserRouter } from "react-router-dom";
+import modal from "../src/component/general/reducer/modal.reducers";
+import toast from "../src/component/general/reducer/toast.reducers";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const rootReducer = combineReducers({
+  modal,
+  toast
+});
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+let store = createStore(
+  rootReducer,
+  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  applyMiddleware(thunk)
+);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>,
+  document.getElementById("root")
+);

@@ -1,19 +1,19 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import BorderdButton from "./component/BorderdButton";
+import { Switch, Route } from "react-router-dom";
+import ModalContainer from "./component/general/container/ModalContainer";
+import ButtonContainer from "./component/Demo/container/ButtonContainer";
+import ToastContainer from "./component/general/container/ToastContainer";
 
 function App() {
   return (
-    <div className="App">
-      <BorderdButton
-        name={"Submit"}
-        backgroundColor={"#d3d3d3"}
-        fontcolor={"blue"}
-        width={100}
-        height={30}
-      />
-    </div>
+    <React.Fragment>
+      <Switch>
+        <Route path="/" component={ButtonContainer}></Route>
+      </Switch>
+      <ModalContainer />
+      <ToastContainer />
+    </React.Fragment>
   );
 }
 
